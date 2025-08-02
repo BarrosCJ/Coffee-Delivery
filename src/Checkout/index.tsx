@@ -1,10 +1,18 @@
-import { Address, ChoosePayment, CoffeeSection, CoffeeTitle, Complete,  
+import { Address, ButtonContainer, ChoosePayment, CoffeeContainer, CoffeeItem, CoffeeSection, CoffeeTitle, Complete,  
   CompletePayment,  
+  Delivery,  
   Dollar, FirstField, Input, 
   Input1, Input2, InputsAddress, 
-  Payment, ReviewOrder, SecondField, SectionButtons, 
-  SectionCheck, TitleM, TitleS } from "./styles";
-import { MapPin, CurrencyDollar, CreditCard, Money, Bank } from 'phosphor-react';
+  ItensTotal, 
+  OrderSummary, 
+  Payment, QuantityButton, RemoveButton, 
+  ReviewOrder, SecondField, SectionButtons, 
+  SectionCheck, Subtitle, TitleM, TitleS, 
+  Total} from "./styles";
+import { MapPin, CurrencyDollar, CreditCard, Money, Bank, Trash} from 'phosphor-react';
+
+import arabe from '../assets/Coffees/arabe.svg';
+
 
 
 export function Checkout() {
@@ -23,18 +31,18 @@ export function Checkout() {
           </Address>
 
           <InputsAddress>
-              <Input type="text" placeholder="CEP" width="30%"/>
+              <Input type="text" placeholder="CEP" width="35%"/>
               <Input type="text" placeholder="Rua"/>
 
             <Input1>
-              <Input type="number" placeholder="Número" width="30%" />
-              <Input type="text" placeholder="Complemento" width="70%" />
+              <Input type="number" placeholder="Número" width="35%" />
+              <Input type="text" placeholder="Complemento" width="65%" />
             </Input1>
 
             <Input2>
-              <Input type="text" placeholder="Bairro" width="30%" />
-              <Input type="text" placeholder="Cidade" width="60%" />
-              <Input type="text" placeholder="UF" width="10%" />
+              <Input type="text" placeholder="Bairro" width="35%" />
+              <Input type="text" placeholder="Cidade" width="50%" />
+              <Input type="text" placeholder="UF" width="12%" />
             </Input2>
           </InputsAddress>
 
@@ -60,10 +68,43 @@ export function Checkout() {
       </CompletePayment>
 
       <CoffeeSection>
-        <CoffeeTitle>Cafés selecionados</CoffeeTitle>
+        <Subtitle>Cafés selecionados</Subtitle>
+
         <ReviewOrder>
-          <span>Revise seus itens de pedido</span>
-          {/* Aqui você pode mapear os cafés selecionados */}
+          <CoffeeContainer>
+            <img src={arabe} alt="Café Arabe" />
+           <CoffeeItem>
+             <CoffeeTitle>Expresso Tradicional</CoffeeTitle>
+              <ButtonContainer>
+                <QuantityButton>
+                  <button>-</button>
+                  <span>1</span>
+                  <button>+</button>
+                </QuantityButton>
+                <RemoveButton>
+                  <Trash color='#8047F8' size={20} />
+                  Remover
+                </RemoveButton>
+              </ButtonContainer>
+           </CoffeeItem>
+          <div>R$: 9,90</div>
+          </CoffeeContainer>
+
+          <OrderSummary>
+            <ItensTotal>
+              <span>Total de itens</span>
+              <span>R$ 9,90</span>
+            </ItensTotal>
+            <Delivery>
+              <span>Entrega</span>
+              <span>R$ 3,50</span>
+            </Delivery>
+            <Total>
+              <span>Total</span>
+              <span>R$ 13,40</span>
+            </Total>
+            <button>Confirmar Pedido</button>
+          </OrderSummary>
         </ReviewOrder>
       </CoffeeSection>
 
