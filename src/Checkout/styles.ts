@@ -298,7 +298,7 @@ export const OrderSummary = styled.div`
         text-transform: uppercase;
         cursor: pointer;
 
-        :hover {
+        &:hover {
             background-color: ${(props) => props.theme.colors["brand-yellow-dark"]};
         }
     }

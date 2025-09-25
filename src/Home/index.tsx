@@ -28,6 +28,8 @@ import {
   TagsCoffee} from './styles'
 import { NavLink } from 'react-router-dom'
 import { ShoppingCart } from 'phosphor-react'
+import { useState } from 'react'
+import useCartStore from '../store'
 
 const coffees = [
   {
@@ -145,6 +147,28 @@ const coffees = [
 ]
 
 export function Home() {
+  const { addItem } = useCartStore()
+
+  const [quantities, setQuantities] = useState<{[key: number]: number}>({});
+
+  const getQuantity = (coffeeId: number) => {
+    return quantities[coffeeId] || 1;
+  };
+
+  const incrementQuantity = (coffeeId: number) => {
+    setQuantities(prev => ({
+      ...prev,
+      [coffeeId]: (prev[coffeeId] || 1) + 1
+    }));
+  };
+
+  const decrementQuantity = (coffeeId: number) => {
+    setQuantities(prev => ({
+      ...prev,
+      [coffeeId]: Math.max((prev[coffeeId] || 1) - 1, 1)
+    }));
+  }
+
   return (
     <>
     <HomeBody>
@@ -207,14 +231,17 @@ export function Home() {
           </CoffeePrice>
           <CoffeeQuantity>
             <QuantitySelector>
-              <button>-</button>
-              <span>1</span>
-              <button>+</button>
+              <button onClick={() => decrementQuantity(coffee.id)}>-</button>
+              <span>{getQuantity(coffee.id)}</span>
+              <button onClick={() => incrementQuantity(coffee.id)}>+</button>
             </QuantitySelector>
             <CartIcon>
-              <NavLink to="/checkout" title="Checkout">
-                <ShoppingCart color='white' size={15} weight="fill" />
-              </NavLink>
+              <button
+                style={{ border: 'none' }}
+                onClick={() => addItem(coffee, getQuantity(coffee.id))}
+              >
+                <ShoppingCart color='white' size={22} weight="fill" />
+              </button>
             </CartIcon>
           </CoffeeQuantity>
         </CoffeeCart>

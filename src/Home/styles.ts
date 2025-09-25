@@ -172,6 +172,21 @@ export const CartIcon = styled.div`
   border-radius: 6px;
   padding: 0.5rem;
 
+   button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.1); // Efeito hover sutil (opcional)
+    }
+  }
+
 `;
 
 
